@@ -1,0 +1,28 @@
+name: Validate SOP frontmatter
+
+on:
+  pull_request:
+    paths:
+      - "content/docs/sop/**"
+      - "schema/sop.schema.json"
+      - "scripts/validate_sops.py"
+  push:
+    branches: [main]
+    paths:
+      - "content/docs/sop/**"
+      - "schema/sop.schema.json"
+      - "scripts/validate_sops.py"
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install pyyaml jsonschema
+      - name: Validate SOP frontmatter
+        run: python scripts/validate_sops.py

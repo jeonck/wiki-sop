@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --hextra-font-sans: "Inter", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  --hextra-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Typography Enhancements */
+body {
+  font-family: var(--hextra-font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.011em;
+  line-height: 1.65;
+}
+
+/* Heading refinement */
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+/* Docs content area spacing */
+.content {
+  font-size: 1.02rem;
+  color: #374151; /* gray-700 */
+}
+
+.dark .content {
+  color: #d1d5db; /* gray-300 */
+}
+
+/* Monospace for code */
+code, pre, kbd {
+  font-family: var(--hextra-font-mono);
+}
+
+/* Link styling */
+.content a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: all 0.2s ease;
+}
+
+/* Sidebar refinement */
+.hextra-sidebar-container {
+  font-size: 0.95rem;
+}
+
+/* Custom primary colors (SOP blue) */
+:root {
+  --primary-hue: 212;
+  --primary-saturation: 100%;
+  --primary-lightness: 45%;
+}
+
+/* Severity badge helpers for SOP tables */
+.sev-p1 { color: #dc2626; font-weight: 600; }
+.sev-p2 { color: #ea580c; font-weight: 600; }
+.sev-p3 { color: #ca8a04; font-weight: 600; }
+.sev-p4 { color: #16a34a; font-weight: 600; }

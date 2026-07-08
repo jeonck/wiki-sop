@@ -1,0 +1,62 @@
+baseURL: https://jeonck.github.io/wiki-sop/
+title: IT SOP Wiki
+
+theme: hextra
+
+locale: en
+defaultContentLanguage: en
+
+enableGitInfo: true
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      passthrough:
+        delimiters:
+          block: [['\[', '\]'], ['$$', '$$']]
+          inline: [['\(', '\)'], ['$', '$']]
+        enable: true
+  highlight:
+    noClasses: false
+  tableOfContents:
+    endLevel: 3
+    ordered: false
+    startLevel: 2
+
+params:
+  description: Agent-ready Standard Operating Procedures for IT operations (AIOps)
+  navbar:
+    displayLogo: true
+    title: IT SOP Wiki
+    width: wide
+  footer:
+    displayCopyright: true
+    displayPoweredBy: true
+    width: wide
+  search:
+    enable: true
+    type: flexsearch
+  math:
+    enable: true
+  mermaid:
+    enable: true
+  editURL:
+    enable: true
+    base: "https://github.com/jeonck/wiki-sop/edit/main/content"
+
+menu:
+  main:
+    - name: SOPs
+      pageRef: /docs
+      weight: 10
+    - name: Search
+      weight: 20
+      params:
+        type: search
+    - name: GitHub
+      weight: 30
+      url: "https://github.com/jeonck/wiki-sop"
+      params:
+        icon: github

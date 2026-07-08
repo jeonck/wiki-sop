@@ -1,0 +1,14 @@
+# Hugo
+/public/
+/resources/_gen/
+/.hugo_build.lock
+
+# OS / editor
+.DS_Store
+*.swp
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.venv/

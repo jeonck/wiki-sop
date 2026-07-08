@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/jeonck/wiki-sop/schema/sop.schema.json",
+  "title": "IT SOP frontmatter",
+  "description": "Validates the YAML frontmatter of every SOP document under content/docs/sop/.",
+  "type": "object",
+  "required": [
+    "sop_id",
+    "title",
+    "target_system",
+    "category",
+    "severity",
+    "symptoms",
+    "verification_metrics",
+    "escalation",
+    "version",
+    "owner",
+    "updated"
+  ],
+  "properties": {
+    "sop_id": {
+      "type": "string",
+      "pattern": "^(DB|API|INFRA|NETWORK|SECURITY)-[0-9]{3}$"
+    },
+    "title": { "type": "string", "minLength": 5 },
+    "target_system": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "category": {
+      "type": "string",
+      "enum": ["DB", "API", "INFRA", "NETWORK", "SECURITY"]
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["P1", "P2", "P3", "P4"]
+    },
+    "symptoms": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "verification_metrics": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["metric", "threshold"],
+        "properties": {
+          "metric": { "type": "string" },
+          "threshold": { "type": "string" },
+          "unit": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "escalation": {
+      "type": "object",
+      "required": ["l1"],
+      "properties": {
+        "l1": { "type": "string" },
+        "l2": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "related_sops": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^(DB|API|INFRA|NETWORK|SECURITY)-[0-9]{3}$" }
+    },
+    "version": { "type": ["number", "string"] },
+    "owner": { "type": "string" },
+    "updated": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": true
+}
