@@ -1,0 +1,62 @@
+name: Scaffold SOP draft from issue
+
+# When a "New SOP request" issue is labeled `new-sop`, generate a schema-valid
+# draft SOP and open a PR back to the issue author.
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  scaffold:
+    if: github.event.label.name == 'new-sop'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install pyyaml jsonschema
+
+      - name: Generate draft SOP
+        id: gen
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: python scripts/scaffold_sop_from_issue.py
+
+      - name: Validate draft against schema
+        run: python scripts/validate_sops.py
+
+      - name: Commit draft and open PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOP_ID: ${{ steps.gen.outputs.sop_id }}
+          FILE_PATH: ${{ steps.gen.outputs.file_path }}
+          BRANCH: ${{ steps.gen.outputs.branch }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add "$FILE_PATH"
+          git commit -m "sop: scaffold ${SOP_ID} from #${ISSUE_NUMBER}"
+          git push -u origin "$BRANCH"
+          pr_url=$(gh pr create \
+            --base main --head "$BRANCH" \
+            --title "sop: ${SOP_ID} (draft) — closes #${ISSUE_NUMBER}" \
+            --body "Auto-generated draft for **${SOP_ID}** from #${ISSUE_NUMBER}.
+
+          - File: \`${FILE_PATH}\`
+          - Please review symptoms, action steps, and verification metrics, then merge.
+
+          Closes #${ISSUE_NUMBER}")
+          gh issue comment "$ISSUE_NUMBER" --body "🤖 Draft **${SOP_ID}** created: ${pr_url}"

@@ -24,7 +24,14 @@ Every SOP has two layers:
 | 6 | Escalation | Who to page if unresolved |
 | 7 | Prevention | Root-cause fixes and follow-ups |
 
-## Writing a new SOP
+## Requesting a new SOP (no editing required)
+
+The lowest-friction path: open a [**New SOP request** issue](https://github.com/jeonck/wiki-sop/issues/new?template=new-sop.yml)
+and fill in the form. A GitHub Action assigns the next `sop_id`, generates a
+schema-valid draft under the right category, and opens a PR back to you — you
+just refine and merge it.
+
+## Writing a new SOP (manually)
 
 1. Copy [`templates/SOP-TEMPLATE.md`](https://github.com/jeonck/wiki-sop/blob/main/templates/SOP-TEMPLATE.md).
 2. Place it under `content/docs/sop/<category>/<SOP-ID>-<slug>.md`.

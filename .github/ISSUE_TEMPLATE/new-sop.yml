@@ -1,0 +1,106 @@
+name: New SOP request
+description: Request a new Standard Operating Procedure. On submit, a draft SOP file and PR are generated automatically.
+title: "[SOP] <short title>"
+labels: ["new-sop"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fill this in and submit. A bot will assign the next `sop_id`, generate a
+        schema-valid draft under `content/docs/sop/<category>/`, and open a PR.
+        You then refine the draft in that PR.
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options: [DB, API, INFRA, NETWORK, SECURITY]
+    validations:
+      required: true
+  - type: input
+    id: title
+    attributes:
+      label: SOP Title
+      placeholder: DB primary failover
+    validations:
+      required: true
+  - type: input
+    id: target_system
+    attributes:
+      label: Target systems
+      description: Comma-separated service/system names.
+      placeholder: login-api, order-api
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options: [P1, P2, P3, P4]
+    validations:
+      required: true
+  - type: input
+    id: owner
+    attributes:
+      label: Owner team
+      placeholder: db-platform
+    validations:
+      required: true
+  - type: textarea
+    id: symptoms
+    attributes:
+      label: Symptoms
+      description: One log signature / metric condition per line. These become the agent's match triggers.
+      placeholder: |
+        primary is unreachable
+        replication lag > 30s
+    validations:
+      required: true
+  - type: input
+    id: metric_name
+    attributes:
+      label: Verification metric name
+      placeholder: db_primary_up
+    validations:
+      required: true
+  - type: input
+    id: metric_threshold
+    attributes:
+      label: Verification threshold
+      placeholder: "== 1"
+    validations:
+      required: true
+  - type: textarea
+    id: situation
+    attributes:
+      label: Situation
+      description: When does this SOP apply and what is the impact?
+    validations:
+      required: true
+  - type: textarea
+    id: diagnosis
+    attributes:
+      label: Diagnosis
+      description: Checks to confirm root cause (commands welcome).
+  - type: textarea
+    id: action
+    attributes:
+      label: Action steps
+      description: One atomic step per line. Becomes the numbered Action section.
+    validations:
+      required: true
+  - type: input
+    id: escalation_l1
+    attributes:
+      label: Escalation L1
+      placeholder: "#db-oncall"
+    validations:
+      required: true
+  - type: input
+    id: escalation_l2
+    attributes:
+      label: Escalation L2 (optional)
+      placeholder: "Jane Kim +82-10-..."
+  - type: textarea
+    id: prevention
+    attributes:
+      label: Prevention / Follow-up
