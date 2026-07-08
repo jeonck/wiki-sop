@@ -22,7 +22,6 @@ tags:
 - db
 ---
 
-> **Draft** generated from an issue request — review and refine before merging.
 
 ## 1. Situation
 
