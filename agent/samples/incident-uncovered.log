@@ -1,0 +1,3 @@
+2026-07-08T03:11:00Z ERROR [ml-inference] CUDA out of memory: tried to allocate 2.30 GiB on GPU 0
+2026-07-08T03:11:00Z ERROR [ml-inference] model shard 3/8 failed to load; falling back to CPU
+2026-07-08T03:11:20Z WARN  [ml-inference] inference latency 9800ms; SLA 500ms

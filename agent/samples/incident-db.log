@@ -1,0 +1,4 @@
+2026-07-08T10:00:04Z ERROR [login-api] FATAL: remaining connection slots are reserved for non-replication superuser connections
+2026-07-08T10:00:05Z WARN  [login-api] connection pool exhausted; 200/200 connections in use, 148 requests queued
+2026-07-08T10:00:07Z ERROR [login-api] p95 latency 1240ms (threshold 200ms) sustained for 5m
+2026-07-08T10:00:09Z ALERT PagerDuty: login-api DB Connection Pool saturation

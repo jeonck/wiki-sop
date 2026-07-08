@@ -1,0 +1,4 @@
+2026-07-08T14:22:01Z INFO  [checkout-api] deploy v2.14.0 rolled out to prod
+2026-07-08T14:23:12Z ERROR [checkout-api] HTTP 500 rate 8.4% of requests (threshold 1%)
+2026-07-08T14:23:12Z ERROR [checkout-api] NullPointerException in PaymentHandler.finalize()
+2026-07-08T14:23:40Z ALERT 5xx surge detected immediately after deploy; error budget burning fast
